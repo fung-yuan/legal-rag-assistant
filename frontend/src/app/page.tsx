@@ -181,6 +181,13 @@ const suggestionChips = [
 
 
 
+const getApiBase = () => {
+  if (typeof window !== "undefined") {
+    return `${window.location.protocol}//${window.location.hostname}:8000`;
+  }
+  return "http://localhost:8000";
+};
+
 export default function HomeApp() {
   const [query, setQuery] = useState("");
   const [sessions, setSessions] = useState<ChatSession[]>([]);
@@ -290,7 +297,7 @@ export default function HomeApp() {
   const fetchStats = async () => {
     setLoadingStats(true);
     try {
-      const res = await fetch("http://localhost:8000/api/stats");
+      const res = await fetch(`${getApiBase()}/api/stats`);
       if (res.ok) {
         const data = await res.json();
         setStats(data);
@@ -335,7 +342,7 @@ export default function HomeApp() {
     
     setLoadingModalPage(true);
     try {
-      const res = await fetch(`http://localhost:8000/api/provisions/correspond?document_id=${encodeURIComponent(modalDocId)}&provision_ref=${encodeURIComponent(modalProvisionRef)}&target_lang=${encodeURIComponent(targetLang)}`);
+      const res = await fetch(`${getApiBase()}/api/provisions/correspond?document_id=${encodeURIComponent(modalDocId)}&provision_ref=${encodeURIComponent(modalProvisionRef)}&target_lang=${encodeURIComponent(targetLang)}`);
       if (res.ok) {
         const data = await res.json();
         if (data) {
@@ -454,7 +461,7 @@ export default function HomeApp() {
     setActiveAgent2Brief("");
 
     try {
-      const response = await fetch("http://localhost:8000/api/chat", {
+      const response = await fetch(`${getApiBase()}/api/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: searchQuery }),
