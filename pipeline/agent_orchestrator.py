@@ -8,7 +8,8 @@ from openai import OpenAI
 from dotenv import load_dotenv
 
 # Load env variables from root .env
-load_dotenv(dotenv_path=r"c:\Users\dell\OneDrive\Desktop\chat_assistent\.env")
+env_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".env"))
+load_dotenv(dotenv_path=env_path)
 
 # Secure print override to handle encoding crashes on Windows cmd stdout
 def print(*args, **kwargs):
@@ -19,7 +20,7 @@ def print(*args, **kwargs):
     sys.stdout.buffer.write(text.encode(enc, errors='replace'))
     sys.stdout.flush()
 
-DB_PATH = r"c:\Users\dell\OneDrive\Desktop\chat_assistent\data\database.db"
+DB_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "data", "database.db"))
 
 # Initialize OpenAI client
 api_key = os.getenv("OPENAI_API_KEY")
