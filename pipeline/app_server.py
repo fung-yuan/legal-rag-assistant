@@ -31,10 +31,14 @@ client = orchestrator.client
 
 app = FastAPI(title="Moroccan Law AI Assistant API")
 
-# Enable CORS for Next.js frontend running on localhost:3000
+# Enable CORS for Next.js frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=[
+        "http://localhost:3000",
+        "https://votre-assistant-juridique.online",
+        "https://www.votre-assistant-juridique.online"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
