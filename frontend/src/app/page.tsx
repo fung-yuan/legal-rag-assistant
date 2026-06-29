@@ -183,7 +183,12 @@ const suggestionChips = [
 
 const getApiBase = () => {
   if (typeof window !== "undefined") {
-    return `${window.location.protocol}//${window.location.hostname}:8000`;
+    const hostname = window.location.hostname;
+    if (hostname === "localhost" || hostname === "127.0.0.1") {
+      return "http://localhost:8000";
+    }
+    // In production, route via the secure HTTPS api subdomain to avoid Mixed Content errors
+    return `https://api.${hostname.replace("www.", "")}`;
   }
   return "http://localhost:8000";
 };
