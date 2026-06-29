@@ -1,0 +1,37 @@
+# Environment
+.env
+*.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# Node
+node_modules/
+dist/
+.next/
+
+# Exclude Thesis Report & Scratch scripts
+report/
+scratch/
+*.pdf
+*.png
+*.jpg
+*.jpeg
+
+# Exclude Large Data Files (>100MB limit on GitHub)
+data/database.db
+data/chroma_mvp/
+data/bm25_index.pkl
+data/chroma_bo/
+data/chroma_db/
+data/raw_pdfs/
+data/raw_pdfs_fr/
+data/etl_intermediate/
+
+# Sentence Transformers cache
+.cache/
